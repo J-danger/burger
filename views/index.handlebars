@@ -8,46 +8,47 @@
 
 	<div class="row">
 
-	<div class="col-md-6">
-	 <div class="panel-panel default">
-	 	<h3>Burgers that are Ready</h3>
-	 	<ul class="list-group">
-	 		{{#each burgers}}
-	 		 {{#unless this.devoured}}
-	 		 <li class="list-group-item">
-	 		  <div class="input-group">
-	 		  	<p class="lead">{{this.burger_name}}</p>
-	 		  	<span class="input-group-btn">
-	 		  		<form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-	 		  			<input type="hidden" name="devoured" value="true">
-	 		  			<button class="btn btn-default btn-sm" type="submit">Devour it!</button>
-	 		  		</form>
-	 		  	</span>
-	 		  </div>
-	 		 </li>
-	 		 {{/unless}}
-	 		{{/each}}
-	 	</ul>
-
-	 </div>
-	</div>
-
-	
-	<div class="row">
 		<div class="col-md-6">
-			<h3>Devoured Burgers</h3>
-			<div class="panel panel-default">
+			<div class="panel-panel default">
+				<h3>Burgers that are Ready</h3>
 				<ul class="list-group">
 					{{#each burgers}}
-					 {{#if this.devoured}}
-					 <li class="list-group-item">
-					 	<p class="lead">{{this.burger_name}}</p>
-					 </li>
-					 {{/if}}
-					  {{/each}}
+					{{#unless this.devoured}}
+					<li class="list-group-item">
+					<div class="input-group">
+						<p class="lead">{{this.burger_name}}</p>
+						<span class="input-group-btn">
+							<form action="/burgers/update/{{this.id}}?_method=PUT" method="POST">
+								<input type="hidden" name="devoured">
+								<button class="btn btn-default btn-sm" type="submit">Devour it!</button>
+							</form>
+						</span>
+					</div>
+					</li>
+					{{/unless}}
+					{{/each}}
 				</ul>
+
 			</div>
 		</div>
+
+	
+		
+			<div class="col-md-6">
+				<h3>Devoured Burgers</h3>
+				<div class="panel panel-default">
+					<ul class="list-group">
+						{{#each burgers}}
+						{{#if this.devoured}}
+						<li class="list-group-item">
+							<p class="lead">{{this.burger_name}}</p>
+						</li>
+						{{/if}}
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+		
 	</div>
 
 	<div class="col-md-10 col-md-offset-1">
