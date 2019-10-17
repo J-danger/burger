@@ -10,11 +10,11 @@ router.get("/", function(req,res){
 
 router.get("/burgers", function(req,res){
 	burgers.all(function(data){
-		var hbsObject = {
+		var newObject = {
 			burgers: data
 		};
-		console.log(hbsObject);
-		res.render("index", hbsObject);
+		
+		res.render("index", newObject);
 	});
 });
 
@@ -26,11 +26,11 @@ router.post("/burgers/create", function(req,res){
 
 router.put("/burgers/update/:id", function(req,res){
 	var condition = "id = " + req.params.id;
-	console.log("condition", condition);
+	console.log(condition);
 
 	burgers.update({
-		"devoured": req.body.devoured
-	}, condition, function(data){
+		devoured: req.body.devoured
+	}, condition, function(){
 		res.redirect("/burgers")
 	});
 });
