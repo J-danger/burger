@@ -1,0 +1,16 @@
+.jumbotron {
+    background: #fcf9ea;
+    color: #f8a978
+}
+
+body {
+    background: #fcf9ea
+}
+
+.card-body {
+    background: #badfdb
+}
+
+.card {
+    border: none
+}

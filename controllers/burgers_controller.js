@@ -27,7 +27,7 @@ router.put("/burgers/update/:id", function(req, res) {
   
 	console.log("condition", condition);
   
-	burgers.update("devoured",
+	burgers.update(
 	  {
 		devoured: req.body.devoured
 	  },
@@ -37,10 +37,23 @@ router.put("/burgers/update/:id", function(req, res) {
 		  // If no rows were changed, then the ID must not exist, so 404
 		  return res.status(404).end();
 		}
-		res.redirect("/burgers")
+		
 		res.status(200).end();  
 	  }
 	);
   })
+
+  router.delete("/burgers/:id", function(req, res) {
+	var condition = "id = " + req.params.id;
+  
+	burgers.delete(condition, function(result) {
+	  if (result.affectedRows == 0) {
+		// If no rows were changed, then the ID must not exist, so 404
+		return res.status(404).end();
+	  } else {
+		res.status(200).end();
+	  }
+	});
+  });
 
 module.exports = router;
