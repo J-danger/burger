@@ -6,50 +6,39 @@
 	</div>
 	
 
-	<div class="row">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+         Burgers to be eaten
+        </div>
+        <!--Div to hold burgers that have not been devoured yet-->
+        <div class="card-body">
+              {{#each burgers}}
+                {{#unless devoured}}
+                  {{> burgers/burger-block devour=false}}
+                {{/unless}}
+              {{/each}}
+        </div>
+      </div>
+    </div>
 
-		<div class="col-md-6">
-			<div class="panel-panel default">
-				<h3>Burgers that are Ready</h3>
-				<ul class="list-group">
-					{{#each burgers}}
-					{{#unless this.devoured}}
-					<li class="list-group-item">
-					<div class="input-group">
-						<p class="lead">{{this.burger_name}}</p>
-						<span class="input-group-btn">
-							<form action="/burgers/update/{{this.id}}?_method=PUT" method="POST">
-								<input type="hidden" name="devoured">
-								<button class="btn btn-default btn-sm" type="submit">Devour it!</button>
-							</form>
-						</span>
-					</div>
-					</li>
-					{{/unless}}
-					{{/each}}
-				</ul>
-
-			</div>
-		</div>
-
-	
-		
-			<div class="col-md-6">
-				<h3>Devoured Burgers</h3>
-				<div class="panel panel-default">
-					<ul class="list-group">
-						{{#each burgers}}
-						{{#if this.devoured}}
-						<li class="list-group-item">
-							<p class="lead">{{this.burger_name}}</p>
-						</li>
-						{{/if}}
-						{{/each}}
-					</ul>
-				</div>
-			</div>
-		
-	</div>
+    <div class="col-md-6">		
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+         Burgers Eaten
+        </div>
+        <!--When a burger has been devoured, put burger here-->
+        <div class="card-body">
+          {{#each burgers}}
+              {{#if devoured}}
+                {{> burgers/burger-devoured devour=true}}
+              {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
 
 	<div class="col-md-10 col-md-offset-1">
 		<p class="lead"></p>
